@@ -1,0 +1,29 @@
+@model IEnumerable<MonsterGym.Models.Cargo>
+
+@{
+    ViewData["Title"] = "Cargos";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h1>Cargos</h1>
+    <a asp-action="Create" class="btn btn-primary">Agregar Cargo</a>
+</div>
+
+<div class="table-responsive">
+<table class="table table-striped table-hover align-middle">
+    <thead><tr>
+        <th>Id</th>
+        <th>Nombre</th>
+        <th>Descripcion</th>
+        <th>Acciones</th>
+    </tr></thead><tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Id</td>
+            <td>@item.Nombre</td>
+            <td>@item.Descripcion</td>
+            <td><a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-outline-primary">Editar</a></td>
+        </tr>
+    }
+</tbody></table></div>

@@ -1,0 +1,35 @@
+@model IEnumerable<MonsterGym.Models.Pago>
+
+@{
+    ViewData["Title"] = "Pagos";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h1>Pagos</h1>
+    <a asp-action="Create" class="btn btn-primary">Agregar Pago</a>
+</div>
+
+<div class="table-responsive">
+<table class="table table-striped table-hover align-middle">
+    <thead><tr>
+        <th>Id</th>
+        <th>ContratoId</th>
+        <th>Monto</th>
+        <th>MetodoPago</th>
+        <th>FechaPago</th>
+        <th>Comprobante</th>
+        <th>Acciones</th>
+    </tr></thead><tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Id</td>
+            <td>@item.ContratoId</td>
+            <td>@item.Monto</td>
+            <td>@item.MetodoPago</td>
+            <td>@item.FechaPago</td>
+            <td>@item.Comprobante</td>
+            <td><a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-outline-primary">Editar</a></td>
+        </tr>
+    }
+</tbody></table></div>
