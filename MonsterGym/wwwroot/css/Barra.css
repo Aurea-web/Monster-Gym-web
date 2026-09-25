@@ -1,0 +1,63 @@
+
+/* Layout Principal y Sidebar */
+body {
+    min-height: 100vh;
+    display: flex;
+    margin: 0;
+    background-color: #f8f9fa;
+}
+
+.sidebar {
+    width: 240px;
+    min-width: 240px;
+    background-color: #1e232a;
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.sidebar-brand {
+    padding: 1.25rem;
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: #ffffff;
+    text-decoration: none;
+    border-bottom: 1px solid #2d3239;
+    display: block;
+}
+
+    .sidebar-brand:hover {
+        color: #ffffff;
+    }
+
+.sidebar .nav-link {
+    color: #a0aec0;
+    padding: 0.85rem 1.25rem;
+    font-size: 0.95rem;
+    transition: all 0.2s ease-in-out;
+    border-left: 4px solid transparent;
+}
+
+    .sidebar .nav-link:hover,
+    .sidebar .nav-link.active {
+        color: #ffffff;
+        background-color: #2a3038;
+        border-left-color: #0d6efd;
+    }
+
+.main-wrapper {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.main-content {
+    flex: 1;
+    padding: 2rem;
+}
+
+footer {
+    background-color: #ffffff;
+}

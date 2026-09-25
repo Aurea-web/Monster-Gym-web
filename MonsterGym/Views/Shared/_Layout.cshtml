@@ -6,39 +6,50 @@
     <title>@ViewData["Title"] - MonsterGym</title>
     <script type="importmap"></script>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/MonsterGym.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/Barra.css" />
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand fw-bold" asp-controller="Home" asp-action="Index">MonsterGym</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Navegación">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item"><a class="nav-link" asp-controller="Home" asp-action="Index">Inicio</a></li>
-                        <li class="nav-item"><a class="nav-link" asp-controller="Cliente" asp-action="Index">Clientes</a></li>
-                        <li class="nav-item"><a class="nav-link" asp-controller="Membresia" asp-action="Index">Membresías</a></li>
-                        <li class="nav-item"><a class="nav-link" asp-controller="Contrato" asp-action="Index">Contratos</a></li>
-                        <li class="nav-item"><a class="nav-link" asp-controller="Empleado" asp-action="Index">Empleados</a></li>
-                        <li class="nav-item"><a class="nav-link" asp-controller="Cargo" asp-action="Index">Cargos</a></li>
-                        <li class="nav-item"><a class="nav-link" asp-controller="Pago" asp-action="Index">Pagos</a></li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
+
+    <!-- Menú Lateral Vertical (Sidebar) -->
+    <aside class="sidebar">
+        <a class="sidebar-brand text-center" asp-controller="Home" asp-action="Index">MonsterGym</a>
+        <ul class="nav nav-pills flex-column mt-3 mb-auto">
+            <li class="nav-item">
+                <a class="nav-link" asp-controller="Home" asp-action="Index">Inicio</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" asp-controller="Cliente" asp-action="Index">Clientes</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" asp-controller="Membresia" asp-action="Index">Membresías</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" asp-controller="Contrato" asp-action="Index">Contratos</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" asp-controller="Empleado" asp-action="Index">Empleados</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" asp-controller="Cargo" asp-action="Index">Cargos</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" asp-controller="Pago" asp-action="Index">Pagos</a>
+            </li>
+        </ul>
+    </aside>
+
+    <!-- Contenido del módulo y pie de página -->
+    <div class="main-wrapper">
+        <main role="main" class="main-content">
             @RenderBody()
         </main>
+
+        <footer class="border-top footer text-muted py-3">
+            <div class="container-fluid text-center">&copy; 2026 - MonsterGym</div>
+        </footer>
     </div>
-    <footer class="border-top footer text-muted">
-        <div class="container">&copy; 2026 - MonsterGym</div>
-    </footer>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
