@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using MonsterGym.Data;
 using MonsterGym.Models;
 
@@ -10,10 +11,19 @@ public class EmpleadoController : Controller
 
     public EmpleadoController(ApplicationDbContext context) => _context = context;
 
-    public IActionResult Index()
+    public IActionResult Index(string estado = "activos")
     {
-        var items = _context.Empleados.ToList();
-        return View(items);
+        var query = _context.Empleados
+            .Include(e => e.Cargo)
+            .AsQueryable();
+
+        if (estado.Equals("activos", StringComparison.OrdinalIgnoreCase))
+            query = query.Where(e => e.Activo);
+        else if (estado.Equals("inactivos", StringComparison.OrdinalIgnoreCase))
+            query = query.Where(e => !e.Activo);
+
+        ViewBag.Estado = estado.ToLowerInvariant();
+        return View(query.OrderBy(e => e.Nombre).ThenBy(e => e.Apellido).ToList());
     }
 
     [HttpGet]

@@ -8,15 +8,21 @@
 
 <form asp-action="Create" method="post">
     <div class="mt-3">
-        <label asp-for="ClienteId" class="form-label"></label>
-        <input asp-for="ClienteId" type="number" class="form-control" />
+        <label asp-for="ClienteId" class="form-label">Nombre</label>
+        <select asp-for="ClienteId" asp-items="ViewBag.Clientes" class="form-select">
+            <option value="">Seleccione un cliente</option>
+        </select>
         <span asp-validation-for="ClienteId" class="text-danger"></span>
     </div>
+
     <div class="mt-3">
-        <label asp-for="MembresiaId" class="form-label"></label>
-        <input asp-for="MembresiaId" type="number" class="form-control" />
+        <label asp-for="MembresiaId" class="form-label">Membresia</label>
+        <select asp-for="MembresiaId" asp-items="ViewBag.Membresias" class="form-select">
+            <option value="">Seleccione una membresia</option>
+        </select>
         <span asp-validation-for="MembresiaId" class="text-danger"></span>
     </div>
+
     <div class="mt-3">
         <label asp-for="FechaInicio" class="form-label"></label>
         <input asp-for="FechaInicio" type="datetime-local" class="form-control" />

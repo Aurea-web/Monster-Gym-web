@@ -10,10 +10,17 @@ public class MembresiaController : Controller
 
     public MembresiaController(ApplicationDbContext context) => _context = context;
 
-    public IActionResult Index()
+    public IActionResult Index(string estado = "activos")
     {
-        var items = _context.Membresias.ToList();
-        return View(items);
+        var query = _context.Membresias.AsQueryable();
+
+        if (estado.Equals("activos", StringComparison.OrdinalIgnoreCase))
+            query = query.Where(m => m.Activa);
+        else if (estado.Equals("inactivos", StringComparison.OrdinalIgnoreCase))
+            query = query.Where(m => !m.Activa);
+
+        ViewBag.Estado = estado.ToLowerInvariant();
+        return View(query.OrderBy(m => m.Nombre).ToList());
     }
 
     [HttpGet]

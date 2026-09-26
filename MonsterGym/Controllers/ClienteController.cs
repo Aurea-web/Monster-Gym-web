@@ -10,10 +10,17 @@ public class ClienteController : Controller
 
     public ClienteController(ApplicationDbContext context) => _context = context;
 
-    public IActionResult Index()
+    public IActionResult Index(string estado = "activos")
     {
-        var items = _context.Clientes.ToList();
-        return View(items);
+        var query = _context.Clientes.AsQueryable();
+
+        if (estado.Equals("activos", StringComparison.OrdinalIgnoreCase))
+            query = query.Where(c => c.Activo);
+        else if (estado.Equals("inactivos", StringComparison.OrdinalIgnoreCase))
+            query = query.Where(c => !c.Activo);
+
+        ViewBag.Estado = estado.ToLowerInvariant();
+        return View(query.OrderBy(c => c.Nombre).ThenBy(c => c.Apellido).ToList());
     }
 
     [HttpGet]
