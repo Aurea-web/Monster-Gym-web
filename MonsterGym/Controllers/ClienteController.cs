@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using MonsterGym.Data;
 using MonsterGym.Models;
 
@@ -48,11 +49,39 @@ public class ClienteController : Controller
         return View(item);
     }
 
+    //[HttpPost]
+    //[ValidateAntiForgeryToken]
+    //public IActionResult Edit(int id, Cliente item)
+    //{
+    //    if (id != item.Id) return NotFound();
+    //    if (ModelState.IsValid)
+    //    {
+    //        _context.Clientes.Update(item);
+    //        _context.SaveChanges();
+    //        return RedirectToAction(nameof(Index));
+    //    }
+    //    return View(item);
+    //}
+
+
     [HttpPost]
     [ValidateAntiForgeryToken]
     public IActionResult Edit(int id, Cliente item)
     {
         if (id != item.Id) return NotFound();
+
+        // 1. Buscamos el registro original en la base de datos sin rastrearlo
+        var clienteExistente = _context.Clientes.AsNoTracking().FirstOrDefault(x => x.Id == id);
+
+        if (clienteExistente == null) return NotFound();
+
+        // 2. Si el usuario dejó la contraseña en blanco, conservamos la anterior
+        if (string.IsNullOrEmpty(item.Contrasena))
+        {
+            ModelState.Remove("Contrasena"); // Eliminamos el error de validación
+            item.Contrasena = clienteExistente.Contrasena; // Mantenemos la contraseña actual
+        }
+
         if (ModelState.IsValid)
         {
             _context.Clientes.Update(item);
@@ -62,3 +91,10 @@ public class ClienteController : Controller
         return View(item);
     }
 }
+
+
+
+
+
+
+

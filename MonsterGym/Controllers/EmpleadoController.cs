@@ -51,11 +51,38 @@ public class EmpleadoController : Controller
         return View(item);
     }
 
+    //[HttpPost]
+    //[ValidateAntiForgeryToken]
+    //public IActionResult Edit(int id, Empleado item)
+    //{
+    //    if (id != item.Id) return NotFound();
+    //    if (ModelState.IsValid)
+    //    {
+    //        _context.Empleados.Update(item);
+    //        _context.SaveChanges();
+    //        return RedirectToAction(nameof(Index));
+    //    }
+    //    return View(item);
+    //}
+    
     [HttpPost]
     [ValidateAntiForgeryToken]
     public IActionResult Edit(int id, Empleado item)
     {
         if (id != item.Id) return NotFound();
+
+        // 1. Buscamos el empleado original en la base de datos sin rastrearlo
+        var empleadoExistente = _context.Empleados.AsNoTracking().FirstOrDefault(x => x.Id == id);
+
+        if (empleadoExistente == null) return NotFound();
+
+        // 2. Si el usuario dejó la contraseña en blanco, conservamos la que ya tenía
+        if (string.IsNullOrEmpty(item.Contrasena))
+        {
+            ModelState.Remove("Contrasena");
+            item.Contrasena = empleadoExistente.Contrasena;
+        }
+
         if (ModelState.IsValid)
         {
             _context.Empleados.Update(item);
@@ -65,3 +92,5 @@ public class EmpleadoController : Controller
         return View(item);
     }
 }
+
+

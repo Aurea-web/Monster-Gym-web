@@ -34,6 +34,10 @@
         <span asp-validation-for="Correo" class="text-danger"></span>
     </div>
     <div class="mt-3">
+        <label class="form-label">Contraseña (Dejar en blanco para mantener la actual)</label>
+        <input name="Contrasena" id="Contrasena" type="password" class="form-control" />
+    </div>
+    <div class="mt-3">
         <label asp-for="CargoId" class="form-label"></label>
         <input asp-for="CargoId" type="number" class="form-control" />
         <span asp-validation-for="CargoId" class="text-danger"></span>
