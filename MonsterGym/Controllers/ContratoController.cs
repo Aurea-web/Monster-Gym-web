@@ -104,5 +104,4 @@ public class ContratoController : Controller
             nameof(Membresia.Id),
             nameof(Membresia.Nombre),
             membresiaId);
-    }
-}
+    } }

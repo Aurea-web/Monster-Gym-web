@@ -8,8 +8,10 @@
 
 <form asp-action="Create" method="post">
     <div class="mt-3">
-        <label asp-for="ContratoId" class="form-label"></label>
-        <input asp-for="ContratoId" type="number" class="form-control" />
+        <label asp-for="ContratoId" class="form-label">Nombre</label>
+        <select asp-for="ContratoId" asp-items="ViewBag.Contratos" class="form-select">
+            <option value="">Seleccione un contratos</option>
+        </select>
         <span asp-validation-for="ContratoId" class="text-danger"></span>
     </div>
     <div class="mt-3">

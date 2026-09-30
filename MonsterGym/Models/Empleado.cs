@@ -50,7 +50,7 @@ public class Empleado
     [StringLength(100, ErrorMessage = "El apellido no puede superar los 100 caracteres")]
     public string Apellido { get; set; } = string.Empty;
 
-    [Required(ErrorMessage = "El documento es obligatorio")]
+    //[Required(ErrorMessage = "El documento es obligatorio")]
     [RegularExpression(@"^[0-9]{8,12}$", ErrorMessage = "El documento debe contener entre 8 y 12 dígitos")]
     public string? Documento { get; set; }
 

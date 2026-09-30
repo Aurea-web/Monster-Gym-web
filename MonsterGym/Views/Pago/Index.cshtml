@@ -13,7 +13,7 @@
 <table class="table table-striped table-hover align-middle">
     <thead><tr>
         <th>Id</th>
-        <th>ContratoId</th>
+        <th>Contrato</th>
         <th>Monto</th>
         <th>MetodoPago</th>
         <th>FechaPago</th>
@@ -24,7 +24,7 @@
     {
         <tr>
             <td>@item.Id</td>
-            <td>@item.ContratoId</td>
+                    <td>@item.Contrato?.Cliente.Nombre @item.Contrato?.Cliente.Apellido</td>
             <td>@item.Monto</td>
             <td>@item.MetodoPago</td>
             <td>@item.FechaPago</td>
