@@ -15,28 +15,50 @@
     <aside class="sidebar">
         <a class="sidebar-brand text-center" asp-controller="Home" asp-action="Index">MonsterGym</a>
         <ul class="nav nav-pills flex-column mt-3 mb-auto">
-            <li class="nav-item">
-                <a class="nav-link" asp-controller="Home" asp-action="Index">Inicio</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" asp-controller="Cliente" asp-action="Index">Clientes</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" asp-controller="Membresia" asp-action="Index">Membresías</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" asp-controller="Contrato" asp-action="Index">Contratos</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" asp-controller="Empleado" asp-action="Index">Empleados</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" asp-controller="Cargo" asp-action="Index">Cargos</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" asp-controller="Pago" asp-action="Index">Pagos</a>
-            </li>
+            @if (User.IsInRole(Rol.Cliente))
+            {
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="MiCuenta" asp-action="Index">Mi cuenta</a>
+                </li>
+            }
+            @if (User.IsInRole(Rol.Administrador) || User.IsInRole(Rol.Recepcionista))
+            {
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="Home" asp-action="Index">Inicio</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="Cliente" asp-action="Index">Clientes</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="Membresia" asp-action="Index">Membresías</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="Contrato" asp-action="Index">Contratos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="Pago" asp-action="Index">Pagos</a>
+                </li>
+            }
+            @if (User.IsInRole(Rol.Administrador))
+            {
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="Empleado" asp-action="Index">Empleados</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="Cargo" asp-action="Index">Cargos</a>
+                </li>
+            }
         </ul>
+        @if (User.Identity?.IsAuthenticated == true)
+        {
+            <div class="p-3 border-top border-secondary small">
+                <div class="fw-semibold">@User.Identity.Name</div>
+                <div class="text-secondary mb-2">@User.FindFirst(System.Security.Claims.ClaimTypes.Role)?.Value</div>
+                <form asp-controller="Cuenta" asp-action="Logout" method="post">
+                    <button type="submit" class="btn btn-sm btn-outline-light w-100">Cerrar sesión</button>
+                </form>
+            </div>
+        }
     </aside>
 
     <!-- Contenido del módulo y pie de página -->

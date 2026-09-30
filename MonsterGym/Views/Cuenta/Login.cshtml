@@ -1,0 +1,45 @@
+﻿@model MonsterGym.Models.LoginViewModel
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Iniciar sesión - MonsterGym</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <style>
+            body { min-height: 100vh; display: flex; align-items: center; justify-content: center; background-color: #1e232a; }
+            .login-card { width: 100%; max-width: 380px; }
+    </style>
+</head>
+<body>
+    <div class="card login-card shadow">
+        <div class="card-body p-4">
+            <h1 class="h3 text-center fw-bold mb-4">MonsterGym</h1>
+
+            <form asp-action="Login" method="post" novalidate>
+                @* @if (ModelState.TryGetValue(string.Empty, out var errorGeneral) && errorGeneral.Errors.Count > 0)
+                {
+                    <div class="alert alert-danger py-2" role="alert">
+                        @errorGeneral.Errors[0].ErrorMessage
+                    </div>
+                } *@
+
+                <div class="mb-3">
+                    <label asp-for="Correo" class="form-label"></label>
+                    <input asp-for="Correo" class="form-control" autocomplete="username" autofocus />
+                    <span asp-validation-for="Correo" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Contrasena" class="form-label"></label>
+                    <input asp-for="Contrasena" class="form-control" autocomplete="current-password" />
+                    <span asp-validation-for="Contrasena" class="text-danger"></span>
+                </div>
+                <button type="submit" class="btn btn-primary w-100">Ingresar</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

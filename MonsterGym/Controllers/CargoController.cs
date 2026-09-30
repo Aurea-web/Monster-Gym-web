@@ -1,9 +1,10 @@
 using Microsoft.AspNetCore.Mvc;
 using MonsterGym.Data;
 using MonsterGym.Models;
-
+using Microsoft.AspNetCore.Authorization;   // agregar arriba
 namespace MonsterGym.Controllers;
 
+[Authorize(Roles = Rol.Administrador)]
 public class CargoController : Controller
 {
     private readonly ApplicationDbContext _context;

@@ -1,9 +1,11 @@
 using Microsoft.AspNetCore.Mvc;
 using MonsterGym.Data;
 using MonsterGym.Models;
+using Microsoft.AspNetCore.Authorization;   
 
 namespace MonsterGym.Controllers;
 
+[Authorize(Roles = Rol.Personal)]
 public class MembresiaController : Controller
 {
     private readonly ApplicationDbContext _context;

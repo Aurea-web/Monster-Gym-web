@@ -1,9 +1,10 @@
 using Microsoft.AspNetCore.Mvc;
 using MonsterGym.Data;
 using MonsterGym.Models;
-
+using Microsoft.AspNetCore.Authorization;   // agregar arriba
 namespace MonsterGym.Controllers;
 
+[Authorize(Roles = Rol.Personal)]
 public class PagoController : Controller
 {
     private readonly ApplicationDbContext _context;

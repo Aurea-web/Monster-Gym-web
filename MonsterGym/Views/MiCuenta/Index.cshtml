@@ -1,0 +1,64 @@
+﻿@model MonsterGym.Models.Cliente
+@{
+    ViewData["Title"] = "Mi cuenta";
+}
+
+<h1>Mi cuenta</h1>
+
+<div class="card mb-4">
+    <div class="card-body">
+        <h2 class="h5">@Model.Nombre @Model.Apellido</h2>
+        <dl class="row mb-0">
+            <dt class="col-sm-3">Documento</dt>
+            <dd class="col-sm-9">@Model.Documento</dd>
+            <dt class="col-sm-3">Teléfono</dt>
+            <dd class="col-sm-9">@Model.Telefono</dd>
+            <dt class="col-sm-3">Correo</dt>
+            <dd class="col-sm-9">@Model.Correo</dd>
+            <dt class="col-sm-3">Contacto de emergencia</dt>
+            <dd class="col-sm-9">@Model.ContactoEmergencia</dd>
+        </dl>
+    </div>
+</div>
+
+<h2 class="h4">Mis contratos</h2>
+@if (!Model.Contratos.Any())
+{
+    <p class="text-muted">Aún no tienes contratos registrados.</p>
+}
+else
+{
+    <div class="table-responsive">
+        <table class="table table-striped align-middle">
+            <thead>
+                <tr><th>Membresía</th><th>Inicio</th><th>Vencimiento</th><th>Estado</th><th>Pagos</th></tr>
+            </thead>
+            <tbody>
+                @foreach (var c in Model.Contratos.OrderByDescending(x => x.FechaInicio))
+                {
+                    <tr>
+                        <td>@c.Membresia?.Nombre</td>
+                        <td>@c.FechaInicio.ToString("dd/MM/yyyy")</td>
+                        <td>@c.FechaVencimiento.ToString("dd/MM/yyyy")</td>
+                        <td>@(c.Congelado ? "Congelado" : c.Activo ? "Activo" : "Inactivo")</td>
+                        <td>
+                            @if (!c.Pagos.Any())
+                            {
+                                <span class="text-muted">Sin pagos</span>
+                            }
+                            else
+                            {
+                                <ul class="mb-0 ps-3">
+                                    @foreach (var p in c.Pagos.OrderByDescending(x => x.FechaPago))
+                                    {
+                                        <li>@p.FechaPago.ToString("dd/MM/yyyy") &ndash; @p.Monto.ToString("N2") (@p.MetodoPago)</li>
+                                    }
+                                </ul>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
