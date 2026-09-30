@@ -20,12 +20,12 @@
             <h1 class="h3 text-center fw-bold mb-4">MonsterGym</h1>
 
             <form asp-action="Login" method="post" novalidate>
-                @* @if (ModelState.TryGetValue(string.Empty, out var errorGeneral) && errorGeneral.Errors.Count > 0)
+                @if (ViewData.ModelState.TryGetValue(string.Empty, out var errorGeneral) && errorGeneral.Errors.Count > 0)
                 {
                     <div class="alert alert-danger py-2" role="alert">
                         @errorGeneral.Errors[0].ErrorMessage
                     </div>
-                } *@
+                }
 
                 <div class="mb-3">
                     <label asp-for="Correo" class="form-label"></label>
